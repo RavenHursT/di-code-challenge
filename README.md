@@ -10,7 +10,7 @@ You don't have to host a working copy of the code, we'll be checking it out loca
 
 ## The Challenge
 
-Behance is one of the most popular websites for front-end and art portfolios.  For this code challenge, you'll be using the Behance JSON API to build out a quick front-end for a search users and profile display website.  To get started, visit here: [https://www.behance.net/dev](Behance Developers).
+Behance is one of the most popular websites for front-end and art portfolios.  For this code challenge, you'll be using the Behance JSON API to build out a quick front-end for a search users and profile display website.  To get started, visit here: [Behance Developers](https://www.behance.net/dev).
 
 - The first view of the app should have a search box where searches for users are executed
 - When a user is chosen/found, the next view is an individual profile page for the user. The profile page should include:
