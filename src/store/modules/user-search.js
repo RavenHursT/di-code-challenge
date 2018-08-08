@@ -32,13 +32,15 @@ export default (state = initState, action) => {
 
 export const search = (q) => dispatch => {
   dispatch({
-    type:USER_SEARCH_REQ
+    type: USER_SEARCH_REQ
   })
 
-  return usersService.find(q).then(resp => dispatch({
-    type: USER_SEARCH_UPDATE,
-    users: resp.body
-  }))
+  return usersService.find(q).then(
+    respBody => dispatch({
+      type: USER_SEARCH_UPDATE,
+      users: respBody.users
+    })
+  )
 }
 
 export const clear = () => dispatch => {

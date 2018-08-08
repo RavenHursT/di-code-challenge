@@ -6,12 +6,12 @@ const app = new Koa()
 const router = new Router();
 
 router.get('/api/users', async (ctx) => {
-  const result = await usersService.find(ctx.request.query.q)
-  console.dir(result.body, {colors: true, depth:2})
+  const jsonBody = await usersService.find(ctx.request.query.q)
+  console.dir(jsonBody, {colors: true, depth:2})
   ctx.set({
     'Content-Type': `application/json`
   })
-  ctx.body = result.body
+  ctx.body = jsonBody
 })
 
 app
