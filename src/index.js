@@ -1,21 +1,32 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.scss'
+import App from './App'
 import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'connected-react-router'
-import store, { history } from './store'
-import registerServiceWorker from './registerServiceWorker';
+import createStore, { history } from './store'
+import registerServiceWorker from './registerServiceWorker'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
+const store = createStore()
+
+registerServiceWorker()
+const rootElem = document.getElementById('root')
+const AppJsx = <Provider store={store}>
+  <ConnectedRouter history={history}>
+    <div>
+      <App />
+    </div>
+  </ConnectedRouter>
+</Provider>
+
 ReactDOM.render(
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <div>
-        <App />
-      </div>
-    </ConnectedRouter>
-  </Provider>,
-  document.getElementById('root')
+  AppJsx,
+  rootElem
 )
-registerServiceWorker();
+
+// if (module.hot) {
+//   module.hot.accept('./App', () => {
+//     ReactDOM.render(AppJsx, rootElem)
+//   })
+// }

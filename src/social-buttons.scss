@@ -1,0 +1,48 @@
+@import "colors";
+
+.social-button {
+  &[href*="facebook"] {
+    .btn {
+      color: $faceBookBlue;
+      border-color: $faceBookBlue;
+      &:hover {
+        border-color: $faceBookBlue;
+        background-color: $faceBookBlue;
+      }
+    }
+  }
+  &[href*="linkedin"] {
+    .btn {
+      color: $linkedInBlue;
+      border-color: $linkedInBlue;
+      &:hover {
+        border-color: $linkedInBlue;
+        background-color: $linkedInBlue;
+      }
+    }
+  }
+  &[href*="twitter"] {
+    .btn {
+      color: $twitterBlue;
+      border-color: $twitterBlue;
+      &:hover {
+        border-color: $twitterBlue;
+        background-color: $twitterBlue;
+      }
+    }
+  }
+  &[href*="instagram"] {
+    .btn {
+      color: $instagramPurple;
+      border-color: $instagramPurple;
+      &:hover {
+        border-color: $instagramPurple;
+        background-color: $instagramPurple;
+      }
+    }
+  }
+
+  .btn:hover {
+    color: #fff;
+  }
+}

@@ -1,0 +1,18 @@
+@import "colors";
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  #root {
+    background: #999;
+  }
+  a {
+    color: #222;
+    font-weight: 300;
+    &:hover {
+      color: lighten(#222, 50%);
+      text-decoration: none;
+    }
+  }
+}

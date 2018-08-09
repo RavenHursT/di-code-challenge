@@ -1,8 +1,13 @@
 import usersService from '../../services/users.service'
+import {
+  getLargestImage,
+  getFullName
+} from '../../util/users.util'
 export const USERS_SEARCH_UPDATE = `USER_SEARCH_UPDATE`
 export const USERS_SEARCH_CLEAR = `USER_SEARCH_CLEAR`
 export const USERS_FETCH_REQ = `USER_FETCH_REQ`
 export const USERS_GET_USER = `USERS_GET_USER`
+export const USERS_GET_PROJECTS = `USERS_GET_PROJECTS`
 
 const initState = {
   users: [],
@@ -32,6 +37,12 @@ export default (state = initState, action) => {
         ...state,
         user: action.user
       }
+    case USERS_GET_PROJECTS:
+      return {
+        ...state,
+        projects: action.projects,
+        fetching: false
+      }
     default:
       return state
   }
@@ -56,9 +67,26 @@ export const getUser = (username) => dispatch => {
   })
 
   return usersService.getByUsername(username).then(
-    resBody => dispatch({
-      type: USERS_GET_USER,
-      user: resBody.user
+    ({user}) => {
+      user.largestImg = getLargestImage(user.images)
+      user.fullName = getFullName(user)
+      return dispatch({
+        type: USERS_GET_USER,
+        user
+      })
+    }
+  )
+}
+
+export const getUserProjects = (username) => dispatch => {
+  dispatch({
+    type: USERS_FETCH_REQ
+  })
+
+  return usersService.getUsersProjects(username).then(
+    ({projects}) => dispatch({
+      type: USERS_GET_PROJECTS,
+      projects
     })
   )
 }

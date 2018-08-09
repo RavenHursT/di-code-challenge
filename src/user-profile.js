@@ -1,7 +1,16 @@
 import React from 'react'
 import connect from 'react-redux/es/connect/connect'
 import {bindActionCreators} from 'redux'
-import {getUser} from './store/modules/users'
+import {getUser, getUserProjects} from './store/modules/users'
+import {
+  Media,
+  Container,
+  Row,
+  Col
+} from 'reactstrap'
+import SocialButtons from './social-buttons'
+import Projects from './projects'
+import './user-profile.scss'
 
 class UserProfile extends React.Component {
   componentWillMount () {
@@ -9,14 +18,41 @@ class UserProfile extends React.Component {
       match: {
         params
       },
-      getUser
+      getUser,
+      getUserProjects
     } = this.props
     getUser(params.username)
+    getUserProjects(params.username)
   }
 
   render () {
-    console.log(this.props.user)
-    return <div>Profile</div>
+    console.log(this.props)
+    const {
+      user,
+      projects
+    } = this.props
+
+    return user ? <Container className="user-profile">
+      <Row>
+        <Media>
+          <Col xs={3}>
+            <Media left>
+              <img src={user.largestImg} alt={`Profile`} />
+            </Media>
+          </Col>
+          <Col xs={9}>
+            <Media body>
+              <Media heading>
+                {user.fullName}
+              </Media>
+              <SocialButtons socialLinks={user.social_links}/>
+              <p>{user.sections.About}</p>
+              <Projects {...{projects}}/>
+            </Media>
+          </Col>
+        </Media>
+      </Row>
+    </Container> : null
   }
 }
 
@@ -24,8 +60,10 @@ export default connect(
   ({userStore}) => ({
     user: userStore.user,
     fetching: userStore.fetching,
+    projects: userStore.projects
   }),
   (dispatch) => bindActionCreators({
-    getUser
+    getUser,
+    getUserProjects
   }, dispatch)
 )(UserProfile)

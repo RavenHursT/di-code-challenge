@@ -14,8 +14,10 @@ const fetchResource = async (resourcePath, params) => {
 
 const find = async (q) => await fetchResource(`users`, {q})
 const getByUsername = async (username) => await fetchResource(`users/${username}`)
+const getUsersProjects = async (username) => await fetchResource(`users/${username}/projects`)
 
 export default {
   find,
-  getByUsername
+  getByUsername,
+  getUsersProjects
 }

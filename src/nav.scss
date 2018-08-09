@@ -1,0 +1,7 @@
+.navbar {
+  .navbar-brand {
+    &>a {
+      color: inherit;
+    }
+  }
+}
