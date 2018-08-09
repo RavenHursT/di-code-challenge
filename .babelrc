@@ -1,4 +1,4 @@
 {
-  "presets": ["env"],
+  "presets": [["@babel/env",{"useBuiltIns":"entry"}], "@babel/preset-react"],
   "plugins": ["@babel/plugin-proposal-object-rest-spread"]
 }
