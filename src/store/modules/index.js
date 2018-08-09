@@ -1,7 +1,7 @@
 
 import { combineReducers } from 'redux'
-import userSearch from './user-search'
+import userStore from './users'
 
 export default combineReducers({
-  userSearch
+  userStore
 })

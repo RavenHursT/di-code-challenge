@@ -14,6 +14,16 @@ router.get('/api/users', async (ctx) => {
   ctx.body = jsonBody
 })
 
+router.get('/api/users/:username', async (ctx) => {
+  console.dir(ctx, {colors:true, depth:2})
+  const jsonBody = await usersService.getByUsername(ctx.params.username)
+  console.dir(jsonBody, {colors: true, depth:2})
+  ctx.set({
+    'Content-Type': `application/json`
+  })
+  ctx.body = jsonBody
+})
+
 app
 .use(router.routes())
 .use(router.allowedMethods())

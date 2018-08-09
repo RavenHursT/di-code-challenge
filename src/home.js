@@ -4,7 +4,8 @@ import { connect } from 'react-redux'
 import {
   search,
   clear
-} from './store/modules/user-search'
+} from './store/modules/users'
+import { push } from 'connected-react-router'
 import Autosuggest from 'react-autosuggest'
 
 class Home extends React.Component{
@@ -26,15 +27,16 @@ class Home extends React.Component{
     const {
       usernames = [],
       search,
-      clear
+      clear,
+      goToProfile
     } = this.props
     const {searchInputVal} = this.state
     return <div className="App-intro">
-      To get started, edit <code>src/App.js</code> and save to reload.
+      Search for a Behance user to view their profile.
       <br/>
       <Autosuggest {...{
         suggestions: usernames,
-        onSuggestionsFetchRequested: ({value}) => (value && value.length > 3) ?
+        onSuggestionsFetchRequested: ({value}) => (value && value.length > 2) ?
           search(value) : null,
         onSuggestionsClearRequested: clear,
         getSuggestionValue: (suggestion) => suggestion,
@@ -42,19 +44,21 @@ class Home extends React.Component{
         inputProps: {
           value: searchInputVal,
           onChange: this.onInputChange
-        }
+        },
+        onSuggestionSelected: (e, {suggestionValue: username}) => goToProfile(username)
       }} />
     </div>
   }
 }
 
 export default connect(
-  ({userSearch}) => ({
-    usernames: userSearch.users.map(user => user.username),
-    isSearching: userSearch.isSearching,
+  ({userStore}) => ({
+    usernames: userStore.users.map(user => user.username),
+    fetching: userStore.fetching,
   }),
   (dispatch) => bindActionCreators({
     search,
-    clear
+    clear,
+    goToProfile: username => push(`/${username}`)
   }, dispatch)
 )(Home)
