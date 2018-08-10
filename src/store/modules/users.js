@@ -1,17 +1,22 @@
 import usersService from '../../services/users.service'
 import {
-  getLargestImage,
-  getFullName,
-  getDisplayStats
+  populateUserMetaFields
 } from '../../util/users.util'
 export const USERS_SEARCH_UPDATE = `USER_SEARCH_UPDATE`
 export const USERS_SEARCH_CLEAR = `USER_SEARCH_CLEAR`
 export const USERS_FETCH_REQ = `USER_FETCH_REQ`
 export const USERS_GET_USER = `USERS_GET_USER`
 export const USERS_GET_PROJECTS = `USERS_GET_PROJECTS`
+export const USERS_GET_FOLLOWERS = `USERS_GET_FOLLOWERS`
+export const USERS_GET_FOLLOWING = `USERS_GET_FOLLOWING`
+export const USERS_GET_WORK_EXP = `USERS_GET_WORK_EXP`
 
 const initState = {
   users: [],
+  projects: [],
+  workExp: [],
+  followers: [],
+  following: [],
   user: null,
   fetching: false
 }
@@ -44,6 +49,24 @@ export default (state = initState, action) => {
         projects: action.projects,
         fetching: false
       }
+    case USERS_GET_WORK_EXP:
+      return {
+        ...state,
+        workExp: action.workExp,
+        fetching: false
+      }
+    case USERS_GET_FOLLOWERS:
+      return {
+        ...state,
+        followers: action.followers,
+        fetching: false
+      }
+    case USERS_GET_FOLLOWING:
+      return {
+        ...state,
+        following: action.following,
+        fetching: false
+      }
     default:
       return state
   }
@@ -69,12 +92,9 @@ export const getUser = (username) => dispatch => {
 
   return usersService.getByUsername(username).then(
     ({user}) => {
-      user.largestImg = getLargestImage(user.images)
-      user.fullName = getFullName(user)
-      user.displayStats = getDisplayStats(user.stats)
       return dispatch({
         type: USERS_GET_USER,
-        user
+        user : populateUserMetaFields(user)
       })
     }
   )
@@ -89,6 +109,45 @@ export const getUserProjects = (username) => dispatch => {
     ({projects}) => dispatch({
       type: USERS_GET_PROJECTS,
       projects
+    })
+  )
+}
+
+export const getUserFollowers = (username) => dispatch => {
+  dispatch({
+    type: USERS_FETCH_REQ
+  })
+
+  return usersService.getUsersFollowers(username).then(
+    ({followers}) => dispatch({
+      type: USERS_GET_FOLLOWERS,
+      followers: followers.map(populateUserMetaFields)
+    })
+  )
+}
+
+export const getUserFollowing = (username) => dispatch => {
+  dispatch({
+    type: USERS_FETCH_REQ
+  })
+
+  return usersService.getUsersFollowing(username).then(
+    ({following}) => dispatch({
+      type: USERS_GET_FOLLOWING,
+      following: following.map(populateUserMetaFields)
+    })
+  )
+}
+
+export const getUserWorkExp = (username) => dispatch => {
+  dispatch({
+    type: USERS_FETCH_REQ
+  })
+
+  return usersService.getUserWorkExperience(username).then(
+    ({work_experience: workExp}) => dispatch({
+      type: USERS_GET_WORK_EXP,
+      workExp
     })
   )
 }

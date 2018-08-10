@@ -4,12 +4,13 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  font-weight: 100;
   #root {
     background: #999;
   }
   a {
     color: #222;
-    font-weight: 300;
+    font-weight: 600;
     &:hover {
       color: lighten(#222, 50%);
       text-decoration: none;

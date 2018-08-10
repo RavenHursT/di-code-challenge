@@ -1,5 +1,6 @@
 import buildServiceUrl from '../util/buildServiceURL'
 import fetch from 'node-fetch'
+import isServer from '../util/isServer.util'
 
 const fetchResource = async (resourcePath, params) => {
   const res = await fetch(buildServiceUrl(resourcePath, params), {
@@ -13,11 +14,17 @@ const fetchResource = async (resourcePath, params) => {
 }
 
 const find = async (q) => await fetchResource(`users`, {q})
-const getByUsername = async (username) => await fetchResource(`users/${username}`)
-const getUsersProjects = async (username) => await fetchResource(`users/${username}/projects`)
+const getByUsername = async username => await fetchResource(`users/${username}`)
+const getUsersProjects = async username => await fetchResource(`users/${username}/projects`)
+const getUsersFollowers = async username => await fetchResource(`users/${username}/followers`)
+const getUsersFollowing = async username => await fetchResource(`users/${username}/following`)
+const getUserWorkExperience = async username => await fetchResource(`users/${username}/${isServer ? `work_experience` : `work-experience`}`)
 
 export default {
   find,
   getByUsername,
-  getUsersProjects
+  getUsersProjects,
+  getUserWorkExperience,
+  getUsersFollowers,
+  getUsersFollowing
 }

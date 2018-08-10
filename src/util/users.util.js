@@ -39,3 +39,10 @@ export const getDisplayStats = stats => Object.keys(stats)
   })
   return displayStats
 }, {})
+
+export const populateUserMetaFields = (user) => {
+  user.largestImg = getLargestImage(user.images)
+  user.fullName = getFullName(user)
+  user.displayStats = getDisplayStats(user.stats)
+  return user
+}

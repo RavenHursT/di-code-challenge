@@ -1,7 +1,12 @@
+@import "colors";
+
 .navbar {
   .navbar-brand {
     &>a {
       color: inherit;
+      &:hover {
+        color: #a2a2a2;
+      }
     }
   }
 }

@@ -58,7 +58,6 @@ class App extends Component {
                 component: Home
               }}/>
               <Route {...{
-                exact: true,
                 path: `/:username`,
                 component: UserProfile
               }} />

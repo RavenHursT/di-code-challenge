@@ -1,18 +1,26 @@
 import React from 'react'
 import connect from 'react-redux/es/connect/connect'
+import { Route } from 'react-router-dom'
 import {bindActionCreators} from 'redux'
-import {getUser, getUserProjects} from './store/modules/users'
+import {
+  getUser,
+  getUserProjects,
+  getUserWorkExp,
+  getUserFollowers,
+  getUserFollowing
+} from './store/modules/users'
 import {
   Media,
   Container,
   Row,
-  Col,
-  ListGroup,
-  ListGroupItem
+  Col
 } from 'reactstrap'
+import {Link} from 'react-router-dom'
 import SocialButtons from './social-buttons'
 import Projects from './projects'
 import Stats from './stats'
+import WorkExp from './work-exp'
+import UserList from './users-list'
 import './user-profile.scss'
 
 class UserProfile extends React.Component {
@@ -22,36 +30,76 @@ class UserProfile extends React.Component {
         params
       },
       getUser,
-      getUserProjects
+      getUserProjects,
+      getUserWorkExp,
+      getUserFollowers,
+      getUserFollowing
     } = this.props
     getUser(params.username)
     getUserProjects(params.username)
+    getUserWorkExp(params.username)
+    getUserFollowers(params.username)
+    getUserFollowing(params.username)
   }
 
   render () {
-    console.log(this.props)
     const {
       user,
-      projects
+      projects,
+      workExp,
+      match,
+      followers,
+      following
     } = this.props
-
     return user ? <Container className="user-profile">
       <Row>
-        <Media>
+        <Media className={`col-12`}>
           <Col xs={3}>
             <Media left>
-              <img src={user.largestImg} alt={`Profile`} />
+              <Link to={match.url}>
+                <img src={user.largestImg} alt={`Profile`} />
+              </Link>
             </Media>
-            <Stats {...{stats: user.displayStats}}/>
+            <Stats {...{
+              stats: user.displayStats,
+              match
+            }} />
+            <WorkExp {...{workExp}} />
           </Col>
           <Col xs={9}>
             <Media body>
-              <Media heading>
-                {user.fullName}
-              </Media>
-              <SocialButtons socialLinks={user.social_links}/>
-              <p>{user.sections.About}</p>
-              <Projects {...{projects}}/>
+              <Route {...{
+                exact: true,
+                path: `${match.path}/`,
+                component: () => <div>
+                  <Media heading>
+                    {user.fullName}
+                  </Media>
+                  <SocialButtons socialLinks={user.social_links}/>
+                  <p>{user.sections.About}</p>
+                  <Projects {...{projects}}/>
+                </div>
+              }} />
+              <Route {...{
+                exact: true,
+                path: `${match.path}/followers`,
+                component: () => <div>
+                  <Media heading>
+                    Followers
+                  </Media>
+                  <UserList {...{users: followers}} />
+                </div>
+              }}/>
+              <Route {...{
+                exact: true,
+                path: `${match.path}/following`,
+                component: () => <div>
+                  <Media heading>
+                    Following
+                  </Media>
+                  <UserList {...{users: following}} />
+                </div>
+              }}/>
             </Media>
           </Col>
         </Media>
@@ -61,13 +109,19 @@ class UserProfile extends React.Component {
 }
 
 export default connect(
-  ({userStore}) => ({
-    user: userStore.user,
-    fetching: userStore.fetching,
-    projects: userStore.projects
+  ({userStore: {user, fetching, projects, workExp, followers, following}}) => ({
+    user,
+    fetching,
+    projects,
+    workExp,
+    followers,
+    following
   }),
   (dispatch) => bindActionCreators({
     getUser,
-    getUserProjects
+    getUserProjects,
+    getUserWorkExp,
+    getUserFollowers,
+    getUserFollowing
   }, dispatch)
 )(UserProfile)
