@@ -6,10 +6,13 @@ import {
   Media,
   Container,
   Row,
-  Col
+  Col,
+  ListGroup,
+  ListGroupItem
 } from 'reactstrap'
 import SocialButtons from './social-buttons'
 import Projects from './projects'
+import Stats from './stats'
 import './user-profile.scss'
 
 class UserProfile extends React.Component {
@@ -39,6 +42,7 @@ class UserProfile extends React.Component {
             <Media left>
               <img src={user.largestImg} alt={`Profile`} />
             </Media>
+            <Stats {...{stats: user.displayStats}}/>
           </Col>
           <Col xs={9}>
             <Media body>

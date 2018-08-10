@@ -1,7 +1,8 @@
 import usersService from '../../services/users.service'
 import {
   getLargestImage,
-  getFullName
+  getFullName,
+  getDisplayStats
 } from '../../util/users.util'
 export const USERS_SEARCH_UPDATE = `USER_SEARCH_UPDATE`
 export const USERS_SEARCH_CLEAR = `USER_SEARCH_CLEAR`
@@ -70,6 +71,7 @@ export const getUser = (username) => dispatch => {
     ({user}) => {
       user.largestImg = getLargestImage(user.images)
       user.fullName = getFullName(user)
+      user.displayStats = getDisplayStats(user.stats)
       return dispatch({
         type: USERS_GET_USER,
         user

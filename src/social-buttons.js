@@ -10,8 +10,8 @@ const getSocialIcon = socialLink => {
     `facebook` : socialLink.url.includes(`instagram`) ?
       `instagram` : socialLink.url.includes(`linkedin`) ?
         `linkedin` : socialLink.url.includes(`twitter`) ?
-          `twitter` : null
-  console.log({iconName})
+          `twitter` : socialLink.url.includes(`pinterest`) ?
+          `pinterest` : null
   return iconName ? <FontAwesomeIcon {...{
     className: `mr-1`,
     icon: [`fab`, iconName]

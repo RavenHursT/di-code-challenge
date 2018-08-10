@@ -8,8 +8,15 @@ import {
   faTwitter,
   faFacebook,
   faInstagram,
-  faLinkedin
+  faLinkedin,
+  faPinterest
 } from '@fortawesome/fontawesome-free-brands'
+import {
+  faThumbsUp,
+  faWalking,
+  faComments,
+  faEye
+} from '@fortawesome/free-solid-svg-icons'
 import Nav from './nav'
 import {
   Jumbotron,
@@ -23,7 +30,12 @@ fontawesome.library.add(
   faTwitter,
   faFacebook,
   faInstagram,
-  faLinkedin
+  faLinkedin,
+  faPinterest,
+  faThumbsUp,
+  faWalking,
+  faComments,
+  faEye
 )
 
 class App extends Component {
@@ -38,7 +50,7 @@ class App extends Component {
               <h1 className="App-title">Behance Navigator</h1>
             </header>
           </Jumbotron>
-          <Row>
+          <Row className={`main-content`}>
             <Col>
               <Route {...{
                 exact: true,

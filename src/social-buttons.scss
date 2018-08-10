@@ -41,6 +41,16 @@
       }
     }
   }
+  &[href*="pinterest"] {
+    .btn {
+      color: $pinterestRed;
+      border-color: $pinterestRed;
+      &:hover {
+        border-color: $pinterestRed;
+        background-color: $pinterestRed;
+      }
+    }
+  }
 
   .btn:hover {
     color: #fff;

@@ -7,6 +7,10 @@ $page-bg-color: #f8f9fa;
   .jumbotron {
     background-color: $dark-gray;
     text-align: center;
+    padding: 0;
+  }
+  .main-content {
+    min-height: calc(100vh - 238px);
   }
 }
 

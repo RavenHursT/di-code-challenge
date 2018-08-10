@@ -1,0 +1,10 @@
+.stat {
+  svg[class*="fa-"] {
+    color: lighten(#222, 30%);
+  }
+  &.following {
+    svg[class*="fa-"] {
+      transform: scaleX(-1);
+    }
+  }
+}
