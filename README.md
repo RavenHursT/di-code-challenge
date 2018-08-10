@@ -1,3 +1,28 @@
+## Installation
+```bash
+ yarn install
+```
+
+## Running
+> TODO: Put these into a single command
+```bash
+yarn run start-api
+```
+```bash
+yarn run start
+```
+
+Visit [http://localhost:3001](http://localhost:3001) in your browser if it doesn't automatically open a browser and navigate there for you.
+
+##Requirements
+Tested w/ the following environment:
+```bash
+node -v && npm -v && yarn -v
+v10.6.0
+6.1.0
+1.7.0
+```
+
 # Dealer Inspire Front End Code Challenge
 
 Hey - welcome to the Dealer Inspire Javascript Code challenge.  We're glad you're here.
