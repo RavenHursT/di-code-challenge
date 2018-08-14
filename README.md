@@ -6,6 +6,8 @@ It's just a "navigator" app for a design/photography portfolio community called 
 
 ## Installation
 ```bash
+ git clone https://github.com/RavenHursT/di-code-challenge.git
+ cd di-code-challenge
  yarn install
 ```
 
