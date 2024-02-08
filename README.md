@@ -1,8 +1,8 @@
 # React/Redux/Redux-Thunk/Reactstrap/Node/Koa2 Code Challenge Example App
 
-This is a good reference app for people to get an idea on how to wire together a comprehensive app that utilizes the technologies in the title.  Was put together by Matthew Marcus as a "code challenge" durring an interview process.
+This is a good reference app for people to get an idea on how to wire together a comprehensive app that utilizes the technologies in the title.  Was put together by Matthew Marcus as a "code challenge" during an interview process.
 
-It's just a "navigator" app for a design/photography portfolio community called [https://www.behance.net/](Behest).  It uses Behest's APIs to pull data for searching and navigating through users' profiles and projects.
+It's just a "navigator" app for a design/photography portfolio community called [Behance](https://www.behance.net).  It uses Behance's APIs to pull data for searching and navigating through users' profiles and projects.
 
 ## Installation
 ```bash
